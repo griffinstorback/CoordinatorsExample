@@ -9,7 +9,7 @@ import UIKit
 
 class ConfirmUpgradeViewController: UIViewController {
     
-    var coordinator: Coordinator?
+    var coordinator: UpgradeCoordinator?
     
     let confirmUpgradePurchaseButton: UIButton
     
@@ -39,15 +39,16 @@ class ConfirmUpgradeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Confirm upgrade"
+        title = "Confirm"
         view.backgroundColor = .systemPink
         
+        confirmUpgradePurchaseButton.setTitle("Confirm upgrade", for: .normal)
         confirmUpgradePurchaseButton.backgroundColor = UIColor.systemGray.withAlphaComponent(0.5)
         confirmUpgradePurchaseButton.layer.cornerRadius = 15
         confirmUpgradePurchaseButton.addTarget(self, action: #selector(confirmUpgradePurchaseButtonPressed), for: .touchUpInside)
     }
     
     @objc func confirmUpgradePurchaseButtonPressed() {
-        
+        coordinator?.confirmUpgrade()
     }
 }

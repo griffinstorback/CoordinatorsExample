@@ -27,6 +27,7 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     func upgrade() {
         // create child coordinator for upgrade flow
         let upgradeCoordinator = UpgradeCoordinator(navigationController: navigationController)
+        upgradeCoordinator.parentCoordinator = self
         childCoordinators.append(upgradeCoordinator)
         upgradeCoordinator.start()
     }
@@ -52,10 +53,12 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     func childCoordinatorDidFinish(_ child: Coordinator?) {
         for (index, coordinator) in childCoordinators.enumerated() {
             if coordinator === child {
+                print("MainCoordinator childCoordinatorDidFinish REMOVING child")
                 childCoordinators.remove(at: index)
                 break
             }
         }
+        print("MainCoordinator childCoordinatorDidFinish NO child removed")
     }
 }
 

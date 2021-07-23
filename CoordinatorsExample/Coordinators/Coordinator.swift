@@ -7,7 +7,7 @@
 
 import UIKit
 
-// Inherits AnyObject to enforce class (not struct)
+/// Base coordinator class. Inherits AnyObject to enforce class (not struct)
 protocol Coordinator: AnyObject {
     var childCoordinators: [Coordinator] { get set }
     var navigationController: UINavigationController { get set }
@@ -15,7 +15,7 @@ protocol Coordinator: AnyObject {
     func start()
 }
 
-// make coordinator inherit this protocol if it can present login screen
+// inherit this protocol if coorinator can present login screen
 protocol Login: AnyObject {
     func login()
 }

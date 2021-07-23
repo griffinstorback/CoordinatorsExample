@@ -8,7 +8,9 @@
 import Foundation
 import UIKit
 
+/// Controls the upgrade flow (consists of UpgradeVC -> ConfirmUpgradeVC)
 class UpgradeCoordinator: Coordinator {
+    var parentCoordinator: MainCoordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     
@@ -26,6 +28,12 @@ class UpgradeCoordinator: Coordinator {
         let confirmUpgradeVC = ConfirmUpgradeViewController()
         confirmUpgradeVC.coordinator = self
         navigationController.pushViewController(confirmUpgradeVC, animated: true)
+    }
+    
+    func confirmUpgrade() {
+        // upgrade has been confirmed, so dismiss UpgradeCoordinator flow
+        navigationController.popToRootViewController(animated: true)
+        parentCoordinator?.childCoordinatorDidFinish(self)
     }
 }
 
